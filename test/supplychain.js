@@ -71,28 +71,7 @@ contract('SupplyChain',(accounts) => {
         });
 
        
-        // it('should add seed batches successfully', async () => {
-        //   for(let i=0;i<Object.keys(this.defaultSeedBatches).length;i++){
-        //    const{brand,manufacturer}= this.defaultSeedBatches[entity];
-        //    const result = await SupplyChainInstance.addEntity(
-        //      brand,
-        //      manufacturer,
-        //      {from:this.owner}
-        //    );
-        //      // console.log(result);
-        //   expectedEvent(result.receipt,"AddSeedBaatch",{
-        //    SeedBatchId:String(),
-        //    manufacturer:manufacturer
-        //   });
-        //  const retrievedSeedBatch = await this.SupplyChainInstance.SeedBatches.call(id);
-        //  assert.equal(id,retrievedSeedBatch.id);
-        //  assert.equal(brand,retrievedSeedBatch.brand);
-        //  assert.equal(manufacturer,retrievedSeedBatch.manufacturer);
-        //  assert.equal(undefined,retrievedSeedBatch.certificateIds);
-        //  // assert.equal(this.ModeEnums[mode].pos,retrievedEntity.mode.toString(),"mismatched modes");
-        //  // assert.equal(actual,expected,errorMessage);
-        //   }
-        // });
+        
  it('should add entites successfully', async () => {
             for(const entity in this.defaultEntites){
              const{id,mode}= this.defaultEntities[entity];
@@ -101,8 +80,8 @@ contract('SupplyChain',(accounts) => {
               mode,
                {from:this.owner}
              );
-               // console.log(result);
-            expectedEvent(result.receipt,"AddEntity",{
+
+             expectedEvent(result.receipt,"AddEntity",{
              entityId:id,
              entityMode:mode
             });
@@ -110,8 +89,8 @@ contract('SupplyChain',(accounts) => {
            assert.equal(id,retrievedEntity.id,"mismatched ids");
    
            assert.equal(this.ModeEnums[mode].pos,retrievedEntity.mode.toString(),"mismatched modes");
-           // assert.equal(actual,expected,errorMessage);
-            }
+
+          }
           });
   it('should add seed batches successfully', async () => {
             for(let i=0;i<Object.keys(this.defaultSeedBatches).length;i++){
@@ -121,7 +100,7 @@ contract('SupplyChain',(accounts) => {
                manufacturer,
                {from:this.owner}
              );
-               // console.log(result);
+               
             expectedEvent(result.receipt,"AddSeedBaatch",{
              SeedBatchId:String(),
              manufacturer:manufacturer
@@ -145,13 +124,13 @@ this.web3 = new Web3( provider ) ;
 const { inspector , manufacturerA } = this.defaultEntitites ;
 const SeedBatchId = 0 ;
 const message = 'Inspector (${inspector.id}) has certified seeds #${seedsId} for Manufacturer (${manufacturerA.id}).';
-// const certificate = await this.SupplyChainInstance.certificates.cal(0);
+
 
 const signature = await this.web3.eth.sign(
 this.web3.utils.keccak256(message),
-// certificates.id,
+
 inspector.id,
-// {from: this.owner}
+
 );
 const result = await this.SupplyChainInstance.issueCertificate(
   inspector.id,
@@ -161,7 +140,6 @@ const result = await this.SupplyChainInstance.issueCertificate(
   signature,
   {from: this.owner}
 );
-// assert.equal(signatureMatches,true);
 expectEvent(result.receipt, "IssueCertificate",{
     issuer: inspector.id,
     prover: manufacture.id,
@@ -195,7 +173,7 @@ inspector.id,
 );
 assert.equal(signerMatches,true);
 
-// ssert.equal(retirevedCertificate.id,0);
+
 
 
 
